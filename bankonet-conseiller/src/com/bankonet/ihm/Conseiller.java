@@ -1,4 +1,4 @@
-package com.bankonet.conseiller;
+package com.bankonet.ihm;
 
 import com.bankonet.lib.*;
 import java.io.BufferedReader;

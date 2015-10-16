@@ -1,4 +1,4 @@
-package com.bankonet.client;
+package com.bankonet.ihm;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
