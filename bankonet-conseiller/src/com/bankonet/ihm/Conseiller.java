@@ -231,8 +231,8 @@ public class Conseiller {
 	 */
 	public static void fermeture(){
 		//fichiers de stockages
-		String clientFilePath = "E:\\Formation Java-JEE\\Java\\TP\\TP2\\client.properties";
-		String compteFilePath = "E:\\Formation Java-JEE\\Java\\TP\\TP2\\compte.properties";
+		String clientFilePath = "C:\\Users\\ETY\\Desktop\\Projets Formation\\Java\\TP\\Bankonet\\client.properties";
+		String compteFilePath = "C:\\Users\\ETY\\Desktop\\Projets Formation\\Java\\TP\\Bankonet\\compte.properties";
 		
 		try{
 			//ouverture des writers

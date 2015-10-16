@@ -57,6 +57,10 @@ public class Client {
 		return this.comptesList; 
 	}
 	
+	public void setComptesList(ArrayList<Compte> comptesList) {
+		this.comptesList = comptesList;
+	}
+
 	//constructeurs
 	public Client(String nom, String prenom, String id, String login, String mdp){
 		setNom(nom);
