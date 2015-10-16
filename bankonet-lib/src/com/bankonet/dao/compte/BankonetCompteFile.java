@@ -1,7 +1,9 @@
 package com.bankonet.dao.compte;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 import com.bankonet.lib.Compte;
@@ -13,7 +15,28 @@ public class BankonetCompteFile implements BankonetCompteFactory {
 
 	@Override
 	public void setComptes(ArrayList<Compte> comptes) {
-		
+
+		try{
+			//ouverture des writers
+			BufferedWriter buffco = new BufferedWriter(new FileWriter(compteFilePath));
+			
+			for (Compte compte:comptes){
+				String strco = compte.getNumero()+"=intitule:"+compte.getIntitule()+"&solde:"+compte.getSolde().toString()+"&param:";
+				if(compte.getClass().equals(CompteCourant.class)){
+					CompteCourant cpt = (CompteCourant)compte;
+					strco += cpt.getMontantDecouvertAutorise();
+				}else{
+					CompteEpargne cpt = (CompteEpargne)compte;
+					strco += cpt.getTauxInteret();
+				}
+				buffco.write(strco+"\n");
+			}
+			
+			//fermeture des writers
+			buffco.close();			
+		}catch (Exception e){
+			System.out.println("erreur de sauvegarde");
+		}
 	}
 
 	@Override
