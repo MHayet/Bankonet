@@ -33,6 +33,10 @@ public abstract class Compte implements CompteStat {
 	}
 	
 	//constructeurs
+	public Compte(String numero){
+		setNumero(numero);
+	}
+	
 	public Compte(String numero, String intitule, Double solde){
 		setNumero(numero);
 		setIntitule(intitule);

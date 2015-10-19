@@ -89,28 +89,36 @@ public class Client {
 	}
 	
 	public Integer getNbComptesCourants(){
-		Iterator<Compte> it = comptesList.iterator();
-		Integer nb = 0;
+		try{
+			Integer nb = 0;
+			Iterator<Compte> it = comptesList.iterator();
 		
-		while (it.hasNext()){
-			if (it.next().getClass().equals(CompteCourant.class)){
-				nb++;
+			while (it.hasNext()){
+				if (it.next().getClass().equals(CompteCourant.class)){
+					nb++;
+				}
 			}
+			return nb;
+		}catch(NullPointerException e){
+			return 0;
 		}
-		return nb;		
 	}
 	
 	public Integer getNbComptesEpargnes(){
-		Iterator<Compte> it = comptesList.iterator();
-		Integer nb = 0;
-		
-		while (it.hasNext()){
-			if (it.next().getClass().equals(CompteEpargne.class)){
-				nb++;
+		try{
+			Integer nb = 0;
+			Iterator<Compte> it = comptesList.iterator();
+
+			while (it.hasNext()){
+				if (it.next().getClass().equals(CompteEpargne.class)){
+					nb++;
+				}
 			}
+			return nb;
+		}catch(NullPointerException e){
+			return 0;
 		}
 		
-		return nb;		
 	}
 	
 	public void creerCompte(Compte compte){

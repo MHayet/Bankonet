@@ -13,7 +13,11 @@ public class CompteCourant extends Compte{
 		this.montantDecouvertAutorise = montantDecouvertAutorise;
 	}
 	
-	//constructeurs		
+	//constructeurs
+	public CompteCourant(String numero){
+		super(numero);
+	}
+	
 	public CompteCourant(String numero, String intitule, Double solde, Double decouvertMax){
 		super (numero, intitule, solde);
 		setMontantDecouvertAutorise(decouvertMax);

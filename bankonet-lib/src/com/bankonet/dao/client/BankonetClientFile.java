@@ -6,22 +6,18 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-import com.bankonet.dao.compte.BankonetCompteFile;
 import com.bankonet.lib.Client;
 import com.bankonet.lib.Compte;
 import com.bankonet.lib.CompteCourant;
+import com.bankonet.lib.CompteEpargne;
 
 public class BankonetClientFile implements BankonetClientFactory {
 	private String clientFilePath = "C:\\Users\\ETY\\Desktop\\Projets Formation\\Java\\TP\\Bankonet\\client.properties";
 
 	@Override
 	public void setClients(ArrayList<Client> clients) {
-		//Liste des comptes
-		ArrayList<Compte> comptes = new ArrayList<>();
-		
-		try{
-			//ouverture des writers
-			BufferedWriter buffcl = new BufferedWriter(new FileWriter(clientFilePath));
+		//ouverture des writers
+		try(BufferedWriter buffcl = new BufferedWriter(new FileWriter(clientFilePath))){
 			
 			for (Client client:clients){
 				ArrayList<String> listCC = new ArrayList<>();
@@ -34,7 +30,6 @@ public class BankonetClientFile implements BankonetClientFactory {
 					}else{
 						listCE.add(compte.getNumero());
 					}
-					comptes.add(compte);
 				}
 				strcl += "&comptescourants:";
 				for (String str:listCC){
@@ -53,23 +48,18 @@ public class BankonetClientFile implements BankonetClientFactory {
 				
 				buffcl.write(strcl+"\n");
 			}
-			//fermeture des writers
-			buffcl.close();			
 		}catch (Exception e){
 			System.out.println("erreur de sauvegarde");
 		}
-		new BankonetCompteFile().setComptes(comptes);
 	}
 
 	@Override
 	public ArrayList<Client> getClients() {
 		//Liste des clients a renvoyer
 		ArrayList<Client> clients= new ArrayList<>();
-		
-		try{
-			//ouverture du reader
-			BufferedReader buff = new BufferedReader(new FileReader(clientFilePath));
-			
+
+		//ouverture du reader
+		try(BufferedReader buff = new BufferedReader(new FileReader(clientFilePath))){			
 			String line;
 			
 			//tant qu'on n'est pas a la fin du fichier 
@@ -86,26 +76,25 @@ public class BankonetClientFile implements BankonetClientFactory {
 				String[] cc = data[4].split(":");
 				String[] ce = data[5].split(":");
 				
-				String[] listCC = null;
-				String[] listCE = null;
-				if (cc.length > 1){
-					listCC = cc[1].split(",");	
-				}
-				if (ce.length > 1){
-					listCE = ce[1].split(",");
-				}
+				String[] listCC = cc[1].split(",");
+				String[] listCE = ce[1].split(",");
 				
 				Client client = new Client(nom[1],prenom[1],id[0],login[1],mdp[1]);
-				
-				//*appel a la lecture des comptes
-				client.setComptesList(new BankonetCompteFile().getComptes(listCC, listCE));
+
+				if (listCC.length > 0){
+					for(String str:listCC){
+						client.creerCompte(new CompteCourant(str));
+					}
+				}
+				if (listCE.length > 0){
+					for(String str:listCE){
+						client.creerCompte(new CompteEpargne(str));
+					}
+				}
 
 				//ajout du client dans le programme			
 				clients.add(client);
 			}
-			//fermeture du reader
-			buff.close();
-			
 		}catch (Exception e){
 			System.out.println("Fichier client introuvable!");
 		}
