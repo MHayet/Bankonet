@@ -3,13 +3,27 @@ package com.bankonet.lib;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "Client")
 public class Client {
 	//attributs
+	@Column(name = "Nom")
 	private String nom;
+	@Column(name = "Prenom")
 	private String prenom;
+	@Id
 	private String identifiant;
+	@Column(name = "Login")
 	private String login;
+	@Column(name = "MDP")
 	private String mdp;
+	@Transient
 	private ArrayList<Compte> comptesList;
 	
 	//accesseurs
@@ -62,6 +76,8 @@ public class Client {
 	}
 
 	//constructeurs
+	public Client(){}
+	
 	public Client(String nom, String prenom, String id, String login, String mdp){
 		setNom(nom);
 		setPrenom(prenom);

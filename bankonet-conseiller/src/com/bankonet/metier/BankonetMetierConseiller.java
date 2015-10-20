@@ -64,10 +64,10 @@ public class BankonetMetierConseiller implements BankonetMetierFactory {
 	}
 
 	@Override
-	public Boolean creerCompteEpargne(String loginClient, String numero, String intitule, Double solde, Double ta) {
+	public Boolean creerCompteEpargne(String idClient, String numero, String intitule, Double solde, Double ta) {
 		Client newCompte = null;
 		for (Client client:clients){
-			if (client.getLogin().equals(loginClient)){
+			if (client.getIdentifiant().equals(idClient)){
 				newCompte = client;
 			}
 		}

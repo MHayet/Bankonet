@@ -1,17 +1,18 @@
 package com.bankonet.ihm;
 
-import com.bankonet.metier.*;
-
-import Commande.*;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Conseiller {
-	public static void afficherMenu(ArrayList<CommandeFactory> commandes){
+import com.bankonet.metier.jpa.BankonetMetierConseiller;
+
+import Commande.CommandeFactoryJPA;
+import Commande.MainCommandeJPA;
+
+public class ConseillerJPA {
+	public static void afficherMenu(ArrayList<CommandeFactoryJPA> commandes){
 		System.out.println("**** Application Conseiller Bancaire ****");
 		System.out.println("0: Arréter le programme");
-		for (CommandeFactory commande:commandes){
+		for (CommandeFactoryJPA commande:commandes){
 			System.out.println(commande.getId() + ": " + commande.getLibelle());
 		}
 		System.out.print("Veuillez choisir une action: ");
@@ -31,7 +32,7 @@ public class Conseiller {
 		//lancement du scanner
 		Scanner sc = new Scanner(System.in);
 		
-		MainCommande cmd = new MainCommande(sc, bmc);
+		MainCommandeJPA cmd = new MainCommandeJPA(sc, bmc);
 		
 		do{
 			String action = "-1";
@@ -39,8 +40,8 @@ public class Conseiller {
 			while (action.equals("-1")){
 				afficherMenu(cmd.getCommandes());
 				action = sc.next();
-				if ( (!action.equals("0")) && (!action.equals("1")) && (!action.equals("2"))
-						&& (!action.equals("3")) && (!action.equals("4")) ){
+				if ( (!action.equals("0")) && (!action.equals("1"))/* && (!action.equals("2"))
+						&& (!action.equals("3")) && (!action.equals("4")) */){
 					action = "-1";
 					System.out.println("Mauvais choix!");
 				}
