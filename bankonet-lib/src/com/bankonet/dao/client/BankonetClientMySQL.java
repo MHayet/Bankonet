@@ -18,9 +18,7 @@ public class BankonetClientMySQL implements BankonetClientFactory {
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankonet","Conseiller","conseiller");
-				Statement statement = connection.createStatement();
-	
-				statement.executeUpdate("DELETE FROM CLIENTCOMPTE");
+				Statement statement = connection.createStatement();				
 				statement.executeUpdate("DELETE FROM CLIENT");
 				
 				String requete = "INSERT INTO CLIENT(NOM,PRENOM,IDENTIFIANT,LOGIN,MDP) VALUES ";
@@ -36,7 +34,7 @@ public class BankonetClientMySQL implements BankonetClientFactory {
 				requete = requete.substring(0,requete.length()-1);
 				requete += ";";				
 				statement.executeUpdate(requete);
-
+				
 				requete2 = requete2.substring(0,requete2.length()-1);
 				requete2 += ";";
 				statement.executeUpdate(requete2);

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import com.bankonet.lib.Client;
@@ -22,6 +23,7 @@ public class BankonetCompteMySQL implements BankonetCompteFactory {
 				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankonet","Conseiller","conseiller");
 				Statement statement = connection.createStatement();
 	
+				statement.executeUpdate("DELETE FROM CLIENTCOMPTE");	
 				statement.executeUpdate("DELETE FROM COMPTE");
 				
 				String requete = "INSERT INTO COMPTE(NUMERO,INTITULE,SOLDE,DECOUVERTMAXIMUM,TAUXINTERET) VALUES ";
@@ -57,9 +59,10 @@ public class BankonetCompteMySQL implements BankonetCompteFactory {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankonet","Conseiller","conseiller");
-			Statement statement = connection.createStatement();
-
-			ResultSet resultats = statement.executeQuery("SELECT * FROM COMPTE");
+			PreparedStatement statement = connection.prepareStatement("SELECT compte.numero, compte.intitule, compte.solde, compte.decouvertmaximum, compte.tauxinteret FROM compte, clientcompte WHERE compte.numero = clientcompte.numerocompte AND clientcompte.identifiantclient = ? ");
+			statement.setString(1, client.getIdentifiant());
+			
+			ResultSet resultats = statement.executeQuery();
 			while(resultats.next()) {
 				if(resultats.getFloat("TauxInteret") == 0){
 					comptes.add(new CompteCourant(resultats.getString("NUMERO"), resultats.getString("INTITULE")
