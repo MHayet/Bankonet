@@ -1,10 +1,12 @@
 package Commande;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
+import com.bankonet.lib.Client;
 import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public class CommandeInit implements CommandeFactoryJPA {
+public class CommandeAfficherListeClientJPA implements CommandeFactoryJPA {
 	//attributs
 	private Integer id;
 	private String libelle;
@@ -52,19 +54,19 @@ public class CommandeInit implements CommandeFactoryJPA {
 		return bmc;
 	}
 	
-	//constructeurs
-	public CommandeInit(Integer id, String lib) {
+	//constructeurs	
+	public CommandeAfficherListeClientJPA(Integer id, String lib) {
 		setId(id);
 		setLibelle(lib);
 	}
 	
-	public CommandeInit(Integer id, String lib, BankonetMetierConseiller bmc) {
+	public CommandeAfficherListeClientJPA(Integer id, String lib, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setConseiller(bmc);
 	}
 	
-	public CommandeInit(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+	public CommandeAfficherListeClientJPA(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setScanner(sc);
@@ -74,10 +76,11 @@ public class CommandeInit implements CommandeFactoryJPA {
 	//methodes
 	@Override
 	public void execute() {
-		System.out.println("**** Initialisation ****");
-		System.out.println("Initialisation en cours");
-		bmc.init();
-		System.out.println("Initialisation terminée");
+		Iterator<Client> it = bmc.getListeClients().iterator();
+		System.out.println("**** Liste de clients ****");
+		while (it.hasNext()){
+			System.out.println(it.next());
+		}
 	}
 
 }

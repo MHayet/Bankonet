@@ -6,11 +6,18 @@ import java.util.Iterator;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Client")
+@NamedQueries({
+	@NamedQuery(name="client.chercherParNom", query="select c from Client c where c.nom = :nom"),
+	@NamedQuery(name="client.chercherParPrenom", query="select c from Client c where c.prenom = :prenom"),
+	@NamedQuery(name="client.supprimerToutClients", query="delete from Client")
+})
 public class Client {
 	//attributs
 	@Column(name = "Nom")

@@ -40,8 +40,9 @@ public class ConseillerJPA {
 			while (action.equals("-1")){
 				afficherMenu(cmd.getCommandes());
 				action = sc.next();
-				if ( (!action.equals("0")) && (!action.equals("1"))/* && (!action.equals("2"))
-						&& (!action.equals("3")) && (!action.equals("4")) */){
+				if ( (!action.equals("0")) && (!action.equals("1")) && (!action.equals("2"))
+						&& (!action.equals("3")) && (!action.equals("4")) && (!action.equals("5"))
+						 && (!action.equals("6")) && (!action.equals("7"))){
 					action = "-1";
 					System.out.println("Mauvais choix!");
 				}
@@ -57,21 +58,26 @@ public class ConseillerJPA {
 				System.out.println("Arret de l'application!");
 				terminated = true;
 				break;
-			//creation d'un compte client
 			case "1":
 				cmd.getCommandes().get(0).execute();
 				break;
-			//creation d'un compte courant, a associer a un client
 			case "2":
 				cmd.getCommandes().get(1).execute();
 				break;
-			//creation d'un compte epargne a associer a un client
 			case "3":
 				cmd.getCommandes().get(2).execute();
 				break;
-			//affichage de la liste des clients
 			case "4":
 				cmd.getCommandes().get(3).execute();
+				break;
+			case "5":
+				cmd.getCommandes().get(4).execute();
+				break;
+			case "6":
+				cmd.getCommandes().get(5).execute();
+				break;
+			case "7":
+				cmd.getCommandes().get(6).execute();
 				break;
 			default :
 				System.out.println("Not yet implemented!");

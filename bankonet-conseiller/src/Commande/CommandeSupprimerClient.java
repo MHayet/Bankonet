@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public class CommandeInit implements CommandeFactoryJPA {
+public class CommandeSupprimerClient implements CommandeFactoryJPA {
 	//attributs
 	private Integer id;
 	private String libelle;
@@ -53,18 +53,18 @@ public class CommandeInit implements CommandeFactoryJPA {
 	}
 	
 	//constructeurs
-	public CommandeInit(Integer id, String lib) {
+	public CommandeSupprimerClient(Integer id, String lib) {
 		setId(id);
 		setLibelle(lib);
 	}
 	
-	public CommandeInit(Integer id, String lib, BankonetMetierConseiller bmc) {
+	public CommandeSupprimerClient(Integer id, String lib, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setConseiller(bmc);
 	}
 	
-	public CommandeInit(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+	public CommandeSupprimerClient(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setScanner(sc);
@@ -74,10 +74,23 @@ public class CommandeInit implements CommandeFactoryJPA {
 	//methodes
 	@Override
 	public void execute() {
-		System.out.println("**** Initialisation ****");
-		System.out.println("Initialisation en cours");
-		bmc.init();
-		System.out.println("Initialisation terminée");
+		Boolean ok = false;
+		System.out.println("**** Supprimer un client ****");
+		System.out.println("ID du client: ");
+		String id = sc.next();
+		System.out.println("Voulez-vous vraiment supprimer le client? [o/N]");
+		String supp = sc.next();
+		if (supp.toUpperCase().equals("O")){
+			ok = bmc.supprimerClient(id);
+		}else{
+			System.out.println("Client non supprimé");
+		}
+		if (ok){
+			System.out.println("Client supprimé");
+		}else{
+			System.out.println("Client non supprimé");
+		}
+		System.out.println("");
 	}
 
 }

@@ -20,6 +20,12 @@ public class MainCommandeJPA {
 
 	public MainCommandeJPA(Scanner sc, BankonetMetierConseiller bmc) {
 		commandes.add(new CommandeInit(1, "Initialiser", sc, bmc));
+		commandes.add(new CommandeAfficherListeClientJPA(7, "Afficher la liste des clients", sc, bmc));
+		commandes.add(new CommandeChercherParNom(2, "Rechercher un client par son nom", sc, bmc));
+		commandes.add(new CommandeChercherParPrenom(3, "Rechercher un client par son prenom", sc, bmc));
+		commandes.add(new CommandeModifierNomClient(4, "Modifier le nom d'un client", sc, bmc));
+		commandes.add(new CommandeSupprimerClient(5, "Supprimer un client", sc, bmc));
+		commandes.add(new CommandeSupprimerToutClients(6, "Supprimer tout les clients", sc, bmc));
 		
 		Collections.sort(commandes, new Comparator<CommandeFactoryJPA>() {
 			@Override

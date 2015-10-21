@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public class CommandeInit implements CommandeFactoryJPA {
+public class CommandeModifierNomClient implements CommandeFactoryJPA {
 	//attributs
 	private Integer id;
 	private String libelle;
@@ -53,18 +53,18 @@ public class CommandeInit implements CommandeFactoryJPA {
 	}
 	
 	//constructeurs
-	public CommandeInit(Integer id, String lib) {
+	public CommandeModifierNomClient(Integer id, String lib) {
 		setId(id);
 		setLibelle(lib);
 	}
 	
-	public CommandeInit(Integer id, String lib, BankonetMetierConseiller bmc) {
+	public CommandeModifierNomClient(Integer id, String lib, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setConseiller(bmc);
 	}
 	
-	public CommandeInit(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+	public CommandeModifierNomClient(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setScanner(sc);
@@ -74,10 +74,18 @@ public class CommandeInit implements CommandeFactoryJPA {
 	//methodes
 	@Override
 	public void execute() {
-		System.out.println("**** Initialisation ****");
-		System.out.println("Initialisation en cours");
-		bmc.init();
-		System.out.println("Initialisation terminée");
+		System.out.println("**** Modifier le nom ****");
+		System.out.println("ID du client: ");
+		String id = sc.next();
+		System.out.println("Nouveau nom:");
+		String nom = sc.next();
+		Boolean ok = bmc.renommerClient(id, nom);
+		if (ok){
+			System.out.println("Nom modifié avec succés");
+		}else{
+			System.out.println("Client introuvable");
+		}
+		System.out.println("");
 	}
 
 }

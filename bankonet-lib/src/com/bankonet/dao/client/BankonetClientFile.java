@@ -102,4 +102,34 @@ public class BankonetClientFile implements BankonetClientFactory {
 		return clients;
 	}
 
+	@Override
+	public void updateClients(ArrayList<Client> clients) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Client getParNom(String nom) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Client getParPrenom(String prenom) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void supprimerClient(String id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void supprimerToutClients() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

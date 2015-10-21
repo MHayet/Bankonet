@@ -16,9 +16,9 @@ public class BankonetMetierConseiller implements BankonetMetierFactory {
 		return clients;
 	}
 
-	/*private void setClients(ArrayList<Client> clients) {
+	private void setClients(ArrayList<Client> clients) {
 		this.clients = clients;
-	}*/
+	}
 
 	//constructeurs
 	public BankonetMetierConseiller() {
@@ -30,8 +30,8 @@ public class BankonetMetierConseiller implements BankonetMetierFactory {
 	//methodes
 	@Override
 	public void initialisation() {
-		/*setClients(bdf.getClientFactory().getClients());
-		for (Client client:clients){
+		setClients(bdf.getClientFactory().getClients());
+		/*for (Client client:clients){
 			client.setComptesList(bdf.getCompteFactory().getComptes(client));
 		}*/
 	}
@@ -45,6 +45,8 @@ public class BankonetMetierConseiller implements BankonetMetierFactory {
 		clients.add(new Client("Kirigaya", "Suguha", "KirigayaSuguha", "leaffa", "alo"));
 		clients.add(new Client("Kono", "Yuki", "KonoYuki", "yuki", "rosario"));
 		bdf.getClientFactory().setClients(clients);
+		
+		this.clients.addAll(clients);
 	}
 
 	@Override
@@ -58,8 +60,68 @@ public class BankonetMetierConseiller implements BankonetMetierFactory {
 		for (Client client:getClients()){
 			comptes.addAll(client.getComptesList());
 		}
-		bdf.getCompteFactory().setComptes(comptes);
-		bdf.getClientFactory().setClients(getClients());*/
+		bdf.getCompteFactory().setComptes(comptes);*/
+		bdf.getClientFactory().updateClients(getClients());
+	}
+
+	@Override
+	public boolean chercherParNom(String nom) {
+		Boolean ok = false;
+		Client client = bdf.getClientFactory().getParNom(nom);
+		if (client != null){
+			this.clients.add(client);
+			ok = true;
+		}
+		return ok;
+	}
+
+	@Override
+	public boolean chercherParPrenom(String prenom) {
+		Boolean ok = false;
+		Client client = bdf.getClientFactory().getParPrenom(prenom);
+		if (client != null){
+			this.clients.add(client);
+			ok = true;
+		}
+		return ok;
+	}
+
+	@Override
+	public boolean renommerClient(String id, String nom) {
+		Boolean ok = false;
+		if (clients.size() > 0){
+			for (Client client:clients){
+				if (client.getIdentifiant().equals(id)){
+					client.setNom(nom);
+					bdf.getClientFactory().updateClients(getClients());
+					ok = true;
+				}
+			}
+		}		
+		return ok;		
+	}
+
+	@Override
+	public boolean supprimerClient(String id) {
+		Boolean ok = false;
+		if (clients.size() > 0){
+			Integer i = 0;
+			for (Client client:clients){
+				if (client.getIdentifiant().equals(id)){
+					clients.remove(client);
+					bdf.getClientFactory().supprimerClient(id);
+					ok = true;
+				}
+				i++;
+			}
+		}		
+		return ok;	
+	}
+
+	@Override
+	public void supprimerToutClients() {
+		clients.removeAll(clients);
+		bdf.getClientFactory().supprimerToutClients();
 	}
 
 }
