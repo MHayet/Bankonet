@@ -1,10 +1,10 @@
-package Commande;
+package com.bankonet.commande.jpa;
 
 import java.util.Scanner;
 
 import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public class CommandeModifierNomClient implements CommandeFactoryJPA {
+public class CommandeSupprimerToutClients implements CommandeFactoryJPA {
 	//attributs
 	private Integer id;
 	private String libelle;
@@ -53,18 +53,18 @@ public class CommandeModifierNomClient implements CommandeFactoryJPA {
 	}
 	
 	//constructeurs
-	public CommandeModifierNomClient(Integer id, String lib) {
+	public CommandeSupprimerToutClients(Integer id, String lib) {
 		setId(id);
 		setLibelle(lib);
 	}
 	
-	public CommandeModifierNomClient(Integer id, String lib, BankonetMetierConseiller bmc) {
+	public CommandeSupprimerToutClients(Integer id, String lib, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setConseiller(bmc);
 	}
 	
-	public CommandeModifierNomClient(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+	public CommandeSupprimerToutClients(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setScanner(sc);
@@ -74,16 +74,14 @@ public class CommandeModifierNomClient implements CommandeFactoryJPA {
 	//methodes
 	@Override
 	public void execute() {
-		System.out.println("**** Modifier le nom ****");
-		System.out.println("ID du client: ");
-		String id = sc.next();
-		System.out.println("Nouveau nom:");
-		String nom = sc.next();
-		Boolean ok = bmc.renommerClient(id, nom);
-		if (ok){
-			System.out.println("Nom modifié avec succés");
+		System.out.println("**** Supprimer tout les clients ****");
+		System.out.println("Voulez-vous vraiment supprimer tout les clients? [o/N]");
+		String supp = sc.next();
+		if (supp.toUpperCase().equals("O")){
+			bmc.supprimerToutClients();
+			System.out.println("Clients supprimés");
 		}else{
-			System.out.println("Client introuvable");
+			System.out.println("Clients non supprimés");
 		}
 		System.out.println("");
 	}

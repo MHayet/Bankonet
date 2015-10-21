@@ -1,10 +1,10 @@
-package Commande;
+package com.bankonet.commande;
 
 import java.util.Scanner;
 
 import com.bankonet.metier.BankonetMetierConseiller;
 
-public class CommandeCreerCompteEpargne implements CommandeFactory {
+public class CommandeCreerCompteCourant implements CommandeFactory {
 	//attributs
 	private Integer id;
 	private String libelle;
@@ -53,18 +53,18 @@ public class CommandeCreerCompteEpargne implements CommandeFactory {
 	}
 	
 	//constructeurs
-	public CommandeCreerCompteEpargne(Integer id, String lib) {
+	public CommandeCreerCompteCourant(Integer id, String lib) {
 		setId(id);
 		setLibelle(lib);
 	}
 	
-	public CommandeCreerCompteEpargne(Integer id, String lib, BankonetMetierConseiller bmc) {
+	public CommandeCreerCompteCourant(Integer id, String lib, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setConseiller(bmc);
 	}
 	
-	public CommandeCreerCompteEpargne(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+	public CommandeCreerCompteCourant(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setScanner(sc);
@@ -76,8 +76,8 @@ public class CommandeCreerCompteEpargne implements CommandeFactory {
 	public void execute() {
 		boolean existe = false;
 		
-		System.out.println("**** Creation d'un compte epargne****");
-		//*saisie de l'id du client pour verifier son existance
+		System.out.println("**** Creation d'un compte courant****");
+		//*saisie de l'id du client pour vérifier son existance
 		System.out.println("Identifiant du client: ");
 		String idc = sc.next();
 		System.out.println("Veuillez saisir le numéro: ");
@@ -86,10 +86,10 @@ public class CommandeCreerCompteEpargne implements CommandeFactory {
 		String intit = sc.next();
 		System.out.println("Veuillez saisir le solde: ");
 		Double solde = sc.nextDouble();
-		System.out.println("Veuillez saisir le taux d'intéret: ");
-		Double ta = sc.nextDouble();
+		System.out.println("Veuillez saisir le découvert maximum autorisé: ");
+		Double dma = sc.nextDouble();
 		
-		existe = bmc.creerCompteEpargne(idc, num, intit, solde, ta);
+		existe = bmc.creerCompteCourant(idc, num, intit, solde, dma);
 		//*sinon on demande la verification de l'id, ou la creation du compte client
 		if (!existe){
 			System.out.println("Client non trouvé!");

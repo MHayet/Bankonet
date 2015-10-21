@@ -1,10 +1,10 @@
-package Commande;
+package com.bankonet.commande.jpa;
 
 import java.util.Scanner;
 
 import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public class CommandeChercherParNom implements CommandeFactoryJPA {
+public class CommandeInit implements CommandeFactoryJPA {
 	//attributs
 	private Integer id;
 	private String libelle;
@@ -53,18 +53,18 @@ public class CommandeChercherParNom implements CommandeFactoryJPA {
 	}
 	
 	//constructeurs
-	public CommandeChercherParNom(Integer id, String lib) {
+	public CommandeInit(Integer id, String lib) {
 		setId(id);
 		setLibelle(lib);
 	}
 	
-	public CommandeChercherParNom(Integer id, String lib, BankonetMetierConseiller bmc) {
+	public CommandeInit(Integer id, String lib, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setConseiller(bmc);
 	}
 	
-	public CommandeChercherParNom(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+	public CommandeInit(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setScanner(sc);
@@ -74,15 +74,10 @@ public class CommandeChercherParNom implements CommandeFactoryJPA {
 	//methodes
 	@Override
 	public void execute() {
-		System.out.println("**** Recherche par nom ****");
-		System.out.println("Nom du client: ");
-		String nom = sc.next();
-		if (bmc.chercherParNom(nom)){
-			System.out.println("Client trouvé");
-		}else{
-			System.out.println("Client introuvable!");
-		}
-		System.out.println("");
+		System.out.println("**** Initialisation ****");
+		System.out.println("Initialisation en cours");
+		bmc.init();
+		System.out.println("Initialisation terminée");
 	}
 
 }

@@ -1,10 +1,10 @@
-package Commande;
+package com.bankonet.commande.jpa;
 
 import java.util.Scanner;
 
-import com.bankonet.metier.BankonetMetierConseiller;
+import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public class CommandeCreerCompte implements CommandeFactory {
+public class CommandeSupprimerClient implements CommandeFactoryJPA {
 	//attributs
 	private Integer id;
 	private String libelle;
@@ -53,18 +53,18 @@ public class CommandeCreerCompte implements CommandeFactory {
 	}
 	
 	//constructeurs
-	public CommandeCreerCompte(Integer id, String lib) {
+	public CommandeSupprimerClient(Integer id, String lib) {
 		setId(id);
 		setLibelle(lib);
 	}
 	
-	public CommandeCreerCompte(Integer id, String lib, BankonetMetierConseiller bmc) {
+	public CommandeSupprimerClient(Integer id, String lib, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setConseiller(bmc);
 	}
 	
-	public CommandeCreerCompte(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+	public CommandeSupprimerClient(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setScanner(sc);
@@ -74,18 +74,23 @@ public class CommandeCreerCompte implements CommandeFactory {
 	//methodes
 	@Override
 	public void execute() {
-		System.out.println("**** Creation d'un compte ****");
-		System.out.println("Veuillez saisir le nom: ");
-		String nom = sc.next();
-		System.out.println("Veuillez saisir le prénom: ");
-		String prenom = sc.next();
-		System.out.println("Veuillez saisir le login: ");
-		String login = sc.next();
-		
-		//ajout du nouveau client dans le programme
-		bmc.creerCompte(nom, prenom, nom+prenom, login);
-		
-		System.out.println("Compte créé: mdp par defaut: 'secret'");
+		Boolean ok = false;
+		System.out.println("**** Supprimer un client ****");
+		System.out.println("ID du client: ");
+		String id = sc.next();
+		System.out.println("Voulez-vous vraiment supprimer le client? [o/N]");
+		String supp = sc.next();
+		if (supp.toUpperCase().equals("O")){
+			ok = bmc.supprimerClient(id);
+		}else{
+			System.out.println("Client non supprimé");
+		}
+		if (ok){
+			System.out.println("Client supprimé");
+		}else{
+			System.out.println("Client non supprimé");
+		}
+		System.out.println("");
 	}
 
 }

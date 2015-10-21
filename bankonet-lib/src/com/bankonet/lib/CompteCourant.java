@@ -1,7 +1,12 @@
 package com.bankonet.lib;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class CompteCourant extends Compte{
 	//attributs
+	@Column(name = "DecouvertMaximum")
 	private Double montantDecouvertAutorise;
 	
 	//accesseurs
@@ -14,6 +19,8 @@ public class CompteCourant extends Compte{
 	}
 	
 	//constructeurs
+	public CompteCourant(){}
+	
 	public CompteCourant(String numero){
 		super(numero);
 	}

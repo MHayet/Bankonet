@@ -1,10 +1,23 @@
 package com.bankonet.lib;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
+
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Compte implements CompteStat {
 	//attributs
+	@Id
 	private String numero;
+	@Column(name = "intitule")
 	private String intitule;
+	@Column(name = "solde")
 	private Double solde;
+	@Transient
 	private static Integer nbCompte = 0;
 	
 	//accesseurs
@@ -33,6 +46,8 @@ public abstract class Compte implements CompteStat {
 	}
 	
 	//constructeurs
+	public Compte(){}
+	
 	public Compte(String numero){
 		setNumero(numero);
 	}

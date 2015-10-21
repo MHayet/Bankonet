@@ -3,10 +3,9 @@ package com.bankonet.ihm;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.bankonet.commande.jpa.CommandeFactoryJPA;
+import com.bankonet.commande.jpa.MainCommandeJPA;
 import com.bankonet.metier.jpa.BankonetMetierConseiller;
-
-import Commande.CommandeFactoryJPA;
-import Commande.MainCommandeJPA;
 
 public class ConseillerJPA {
 	public static void afficherMenu(ArrayList<CommandeFactoryJPA> commandes){

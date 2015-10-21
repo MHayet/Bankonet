@@ -1,12 +1,10 @@
-package Commande;
+package com.bankonet.commande.jpa;
 
-import java.util.Iterator;
 import java.util.Scanner;
 
-import com.bankonet.lib.Client;
-import com.bankonet.metier.BankonetMetierConseiller;
+import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public class CommandeAfficherListeClient implements CommandeFactory {
+public class CommandeChercherParNom implements CommandeFactoryJPA {
 	//attributs
 	private Integer id;
 	private String libelle;
@@ -54,19 +52,19 @@ public class CommandeAfficherListeClient implements CommandeFactory {
 		return bmc;
 	}
 	
-	//constructeurs	
-	public CommandeAfficherListeClient(Integer id, String lib) {
+	//constructeurs
+	public CommandeChercherParNom(Integer id, String lib) {
 		setId(id);
 		setLibelle(lib);
 	}
 	
-	public CommandeAfficherListeClient(Integer id, String lib, BankonetMetierConseiller bmc) {
+	public CommandeChercherParNom(Integer id, String lib, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setConseiller(bmc);
 	}
 	
-	public CommandeAfficherListeClient(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+	public CommandeChercherParNom(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setScanner(sc);
@@ -76,11 +74,15 @@ public class CommandeAfficherListeClient implements CommandeFactory {
 	//methodes
 	@Override
 	public void execute() {
-		Iterator<Client> it = bmc.getListeClients().iterator();
-		System.out.println("**** Liste de clients ****");
-		while (it.hasNext()){
-			System.out.println(it.next());
+		System.out.println("**** Recherche par nom ****");
+		System.out.println("Nom du client: ");
+		String nom = sc.next();
+		if (bmc.chercherParNom(nom)){
+			System.out.println("Client trouvé");
+		}else{
+			System.out.println("Client introuvable!");
 		}
+		System.out.println("");
 	}
 
 }

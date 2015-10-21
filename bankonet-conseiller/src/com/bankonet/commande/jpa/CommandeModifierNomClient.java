@@ -1,10 +1,10 @@
-package Commande;
+package com.bankonet.commande.jpa;
 
 import java.util.Scanner;
 
 import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public class CommandeChercherParPrenom implements CommandeFactoryJPA {
+public class CommandeModifierNomClient implements CommandeFactoryJPA {
 	//attributs
 	private Integer id;
 	private String libelle;
@@ -53,18 +53,18 @@ public class CommandeChercherParPrenom implements CommandeFactoryJPA {
 	}
 	
 	//constructeurs
-	public CommandeChercherParPrenom(Integer id, String lib) {
+	public CommandeModifierNomClient(Integer id, String lib) {
 		setId(id);
 		setLibelle(lib);
 	}
 	
-	public CommandeChercherParPrenom(Integer id, String lib, BankonetMetierConseiller bmc) {
+	public CommandeModifierNomClient(Integer id, String lib, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setConseiller(bmc);
 	}
 	
-	public CommandeChercherParPrenom(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+	public CommandeModifierNomClient(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setScanner(sc);
@@ -74,13 +74,16 @@ public class CommandeChercherParPrenom implements CommandeFactoryJPA {
 	//methodes
 	@Override
 	public void execute() {
-		System.out.println("**** Recherche par prenom ****");
-		System.out.println("Prenom du client: ");
-		String prenom = sc.next();
-		if (bmc.chercherParPrenom(prenom)){
-			System.out.println("Client trouvé");
+		System.out.println("**** Modifier le nom ****");
+		System.out.println("ID du client: ");
+		String id = sc.next();
+		System.out.println("Nouveau nom:");
+		String nom = sc.next();
+		Boolean ok = bmc.renommerClient(id, nom);
+		if (ok){
+			System.out.println("Nom modifié avec succés");
 		}else{
-			System.out.println("Client introuvable!");
+			System.out.println("Client introuvable");
 		}
 		System.out.println("");
 	}

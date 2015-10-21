@@ -1,10 +1,10 @@
-package Commande;
+package com.bankonet.commande.jpa;
 
 import java.util.Scanner;
 
-import com.bankonet.metier.BankonetMetierConseiller;
+import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public interface CommandeFactory {
+public interface CommandeFactoryJPA {
 	public void setId(Integer id);
 	public Integer getId();
 	public void setLibelle(String lib);

@@ -1,8 +1,7 @@
 package com.bankonet.ihm;
 
+import com.bankonet.commande.*;
 import com.bankonet.metier.*;
-
-import Commande.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;

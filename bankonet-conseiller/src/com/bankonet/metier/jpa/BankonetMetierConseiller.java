@@ -2,8 +2,8 @@ package com.bankonet.metier.jpa;
 
 import java.util.ArrayList;
 
-import com.bankonet.dao.BankonetDAOFactory;
-import com.bankonet.dao.BankonetFactoryJPA;
+import com.bankonet.dao.jpa.BankonetDAOFactory;
+import com.bankonet.dao.jpa.BankonetFactoryJPA;
 import com.bankonet.lib.Client;
 
 public class BankonetMetierConseiller implements BankonetMetierFactory {

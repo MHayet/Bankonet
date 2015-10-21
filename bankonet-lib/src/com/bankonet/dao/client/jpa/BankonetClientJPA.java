@@ -1,4 +1,4 @@
-package com.bankonet.dao.client;
+package com.bankonet.dao.client.jpa;
 
 import java.util.ArrayList;
 

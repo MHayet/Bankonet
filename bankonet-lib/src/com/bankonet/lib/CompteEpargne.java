@@ -1,10 +1,15 @@
 package com.bankonet.lib;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+@Entity
 public class CompteEpargne extends Compte{
 	//constantes
 	private static Double plafond = 500.0;
 	
 	//attributs
+	@Column(name = "tauxinteret")
 	private Double tauxInteret;
 	
 	//accesseurs
@@ -17,6 +22,8 @@ public class CompteEpargne extends Compte{
 	}
 	
 	//constructeurs
+	public CompteEpargne(){}
+	
 	public CompteEpargne(String numero){
 		super(numero);
 	}

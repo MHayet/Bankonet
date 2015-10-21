@@ -1,12 +1,12 @@
-package com.bankonet.dao;
+package com.bankonet.dao.jpa;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.bankonet.dao.client.BankonetClientFactory;
-import com.bankonet.dao.client.BankonetClientJPA;
-import com.bankonet.dao.compte.BankonetCompteFactory;
-import com.bankonet.dao.compte.BankonetCompteJPA;
+import com.bankonet.dao.client.jpa.BankonetClientFactory;
+import com.bankonet.dao.client.jpa.BankonetClientJPA;
+import com.bankonet.dao.compte.jpa.BankonetCompteFactory;
+import com.bankonet.dao.compte.jpa.BankonetCompteJPA;
 
 public class BankonetFactoryJPA implements BankonetDAOFactory {
 	private EntityManagerFactory emf;

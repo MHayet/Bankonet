@@ -1,12 +1,10 @@
-package Commande;
+package com.bankonet.commande;
 
-import java.util.Iterator;
 import java.util.Scanner;
 
-import com.bankonet.lib.Client;
-import com.bankonet.metier.jpa.BankonetMetierConseiller;
+import com.bankonet.metier.BankonetMetierConseiller;
 
-public class CommandeAfficherListeClientJPA implements CommandeFactoryJPA {
+public class CommandeCreerCompte implements CommandeFactory {
 	//attributs
 	private Integer id;
 	private String libelle;
@@ -54,19 +52,19 @@ public class CommandeAfficherListeClientJPA implements CommandeFactoryJPA {
 		return bmc;
 	}
 	
-	//constructeurs	
-	public CommandeAfficherListeClientJPA(Integer id, String lib) {
+	//constructeurs
+	public CommandeCreerCompte(Integer id, String lib) {
 		setId(id);
 		setLibelle(lib);
 	}
 	
-	public CommandeAfficherListeClientJPA(Integer id, String lib, BankonetMetierConseiller bmc) {
+	public CommandeCreerCompte(Integer id, String lib, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setConseiller(bmc);
 	}
 	
-	public CommandeAfficherListeClientJPA(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+	public CommandeCreerCompte(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setScanner(sc);
@@ -76,11 +74,18 @@ public class CommandeAfficherListeClientJPA implements CommandeFactoryJPA {
 	//methodes
 	@Override
 	public void execute() {
-		Iterator<Client> it = bmc.getListeClients().iterator();
-		System.out.println("**** Liste de clients ****");
-		while (it.hasNext()){
-			System.out.println(it.next());
-		}
+		System.out.println("**** Creation d'un compte ****");
+		System.out.println("Veuillez saisir le nom: ");
+		String nom = sc.next();
+		System.out.println("Veuillez saisir le prénom: ");
+		String prenom = sc.next();
+		System.out.println("Veuillez saisir le login: ");
+		String login = sc.next();
+		
+		//ajout du nouveau client dans le programme
+		bmc.creerCompte(nom, prenom, nom+prenom, login);
+		
+		System.out.println("Compte créé: mdp par defaut: 'secret'");
 	}
 
 }

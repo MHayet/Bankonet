@@ -1,10 +1,12 @@
-package Commande;
+package com.bankonet.commande.jpa;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
+import com.bankonet.lib.Client;
 import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public class CommandeSupprimerToutClients implements CommandeFactoryJPA {
+public class CommandeAfficherListeClientJPA implements CommandeFactoryJPA {
 	//attributs
 	private Integer id;
 	private String libelle;
@@ -52,19 +54,19 @@ public class CommandeSupprimerToutClients implements CommandeFactoryJPA {
 		return bmc;
 	}
 	
-	//constructeurs
-	public CommandeSupprimerToutClients(Integer id, String lib) {
+	//constructeurs	
+	public CommandeAfficherListeClientJPA(Integer id, String lib) {
 		setId(id);
 		setLibelle(lib);
 	}
 	
-	public CommandeSupprimerToutClients(Integer id, String lib, BankonetMetierConseiller bmc) {
+	public CommandeAfficherListeClientJPA(Integer id, String lib, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setConseiller(bmc);
 	}
 	
-	public CommandeSupprimerToutClients(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+	public CommandeAfficherListeClientJPA(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setScanner(sc);
@@ -74,16 +76,11 @@ public class CommandeSupprimerToutClients implements CommandeFactoryJPA {
 	//methodes
 	@Override
 	public void execute() {
-		System.out.println("**** Supprimer tout les clients ****");
-		System.out.println("Voulez-vous vraiment supprimer tout les clients? [o/N]");
-		String supp = sc.next();
-		if (supp.toUpperCase().equals("O")){
-			bmc.supprimerToutClients();
-			System.out.println("Clients supprimés");
-		}else{
-			System.out.println("Clients non supprimés");
+		Iterator<Client> it = bmc.getListeClients().iterator();
+		System.out.println("**** Liste de clients ****");
+		while (it.hasNext()){
+			System.out.println(it.next());
 		}
-		System.out.println("");
 	}
 
 }

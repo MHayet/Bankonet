@@ -1,7 +1,8 @@
-package com.bankonet.dao.compte;
+package com.bankonet.dao.compte.jpa;
 
 import java.util.ArrayList;
 
+import com.bankonet.dao.compte.jpa.BankonetCompteFactory;
 import com.bankonet.lib.Client;
 import com.bankonet.lib.Compte;
 

@@ -1,4 +1,4 @@
-package Commande;
+package com.bankonet.commande;
 
 import java.util.ArrayList;
 import java.util.Collections;

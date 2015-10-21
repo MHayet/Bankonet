@@ -1,10 +1,12 @@
-package Commande;
+package com.bankonet.commande;
 
+import java.util.Iterator;
 import java.util.Scanner;
 
-import com.bankonet.metier.jpa.BankonetMetierConseiller;
+import com.bankonet.lib.Client;
+import com.bankonet.metier.BankonetMetierConseiller;
 
-public class CommandeSupprimerClient implements CommandeFactoryJPA {
+public class CommandeAfficherListeClient implements CommandeFactory {
 	//attributs
 	private Integer id;
 	private String libelle;
@@ -52,19 +54,19 @@ public class CommandeSupprimerClient implements CommandeFactoryJPA {
 		return bmc;
 	}
 	
-	//constructeurs
-	public CommandeSupprimerClient(Integer id, String lib) {
+	//constructeurs	
+	public CommandeAfficherListeClient(Integer id, String lib) {
 		setId(id);
 		setLibelle(lib);
 	}
 	
-	public CommandeSupprimerClient(Integer id, String lib, BankonetMetierConseiller bmc) {
+	public CommandeAfficherListeClient(Integer id, String lib, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setConseiller(bmc);
 	}
 	
-	public CommandeSupprimerClient(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+	public CommandeAfficherListeClient(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
 		setId(id);
 		setLibelle(lib);
 		setScanner(sc);
@@ -74,23 +76,11 @@ public class CommandeSupprimerClient implements CommandeFactoryJPA {
 	//methodes
 	@Override
 	public void execute() {
-		Boolean ok = false;
-		System.out.println("**** Supprimer un client ****");
-		System.out.println("ID du client: ");
-		String id = sc.next();
-		System.out.println("Voulez-vous vraiment supprimer le client? [o/N]");
-		String supp = sc.next();
-		if (supp.toUpperCase().equals("O")){
-			ok = bmc.supprimerClient(id);
-		}else{
-			System.out.println("Client non supprimé");
+		Iterator<Client> it = bmc.getListeClients().iterator();
+		System.out.println("**** Liste de clients ****");
+		while (it.hasNext()){
+			System.out.println(it.next());
 		}
-		if (ok){
-			System.out.println("Client supprimé");
-		}else{
-			System.out.println("Client non supprimé");
-		}
-		System.out.println("");
 	}
 
 }

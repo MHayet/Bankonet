@@ -6,10 +6,11 @@ import java.util.Iterator;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+//import javax.persistence.JoinTable;
+//import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Client")
@@ -30,7 +31,12 @@ public class Client {
 	private String login;
 	@Column(name = "MDP")
 	private String mdp;
-	@Transient
+	/*@ManyToMany
+	@JoinTable(
+		name="RES_CH",
+		joinColumns=@JoinColumn(name="ID_RES", referencedColumnName="ID"),
+		inverseJoinColumns=@JoinColumn(name="ID_CH", referencedColumnName="ID")
+	)*/
 	private ArrayList<Compte> comptesList;
 	
 	//accesseurs
