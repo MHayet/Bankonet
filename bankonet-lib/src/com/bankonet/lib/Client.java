@@ -2,12 +2,14 @@ package com.bankonet.lib;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-//import javax.persistence.JoinTable;
-//import javax.persistence.ManyToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -31,13 +33,20 @@ public class Client {
 	private String login;
 	@Column(name = "MDP")
 	private String mdp;
-	/*@ManyToMany
+	@ManyToMany
 	@JoinTable(
-		name="RES_CH",
-		joinColumns=@JoinColumn(name="ID_RES", referencedColumnName="ID"),
-		inverseJoinColumns=@JoinColumn(name="ID_CH", referencedColumnName="ID")
-	)*/
-	private ArrayList<Compte> comptesList;
+		name="clientcourant",
+		joinColumns = @JoinColumn(name="IdentifiantClient", referencedColumnName="Identifiant"),
+		inverseJoinColumns = @JoinColumn(name="NumeroCompte", referencedColumnName="Numero")
+	)
+	private List<CompteCourant> comptesListCourant;
+	@ManyToMany
+	@JoinTable(
+		name="clientepargne",
+		joinColumns = @JoinColumn(name="IdentifiantClient", referencedColumnName="Identifiant"),
+		inverseJoinColumns = @JoinColumn(name="NumeroCompte", referencedColumnName="Numero")
+	)
+	private List<CompteEpargne> comptesListEpargne;
 	
 	//accesseurs
 	public String getNom() {
@@ -81,11 +90,20 @@ public class Client {
 	}
 
 	public ArrayList<Compte> getComptesList(){
-		return this.comptesList; 
+		ArrayList<Compte> comptes = new ArrayList<>();
+		comptes.addAll(comptesListCourant);
+		comptes.addAll(comptesListEpargne);
+		return comptes; 
 	}
 	
 	public void setComptesList(ArrayList<Compte> comptesList) {
-		this.comptesList = comptesList;
+		for (Compte compte:comptesList){
+			if(compte.getClass().equals(CompteCourant.class)){
+				this.comptesListCourant.add((CompteCourant)compte);
+			}else{
+				this.comptesListEpargne.add((CompteEpargne)compte);
+			}
+		}		
 	}
 
 	//constructeurs
@@ -97,7 +115,8 @@ public class Client {
 		setIdentifiant(id);
 		setLogin(login);
 		setMdp(mdp);
-		this.comptesList = new ArrayList<Compte>();
+		this.comptesListCourant = new ArrayList<CompteCourant>();
+		this.comptesListEpargne = new ArrayList<CompteEpargne>();
 	}
 
 	@Override
@@ -107,67 +126,57 @@ public class Client {
 	
 	//methodes
 	public Double calculerAvoirGlobal(){
-		Iterator<Compte> it = comptesList.iterator();
+		Iterator<CompteCourant> itc = comptesListCourant.iterator();
+		Iterator<CompteEpargne> ite = comptesListEpargne.iterator();
 		Double avoir = 0.0;
 		
-		while (it.hasNext()){
-			avoir += it.next().getSolde();
+		while (itc.hasNext()){
+			avoir += itc.next().getSolde();
+		}
+		while (ite.hasNext()){
+			avoir += ite.next().getSolde();
 		}
 		
 		return avoir;
 	}
 	
 	public Integer getNbComptesCourants(){
-		try{
-			Integer nb = 0;
-			Iterator<Compte> it = comptesList.iterator();
-		
-			while (it.hasNext()){
-				if (it.next().getClass().equals(CompteCourant.class)){
-					nb++;
-				}
-			}
-			return nb;
-		}catch(NullPointerException e){
-			return 0;
-		}
+		return this.comptesListCourant.size();
 	}
 	
 	public Integer getNbComptesEpargnes(){
-		try{
-			Integer nb = 0;
-			Iterator<Compte> it = comptesList.iterator();
-
-			while (it.hasNext()){
-				if (it.next().getClass().equals(CompteEpargne.class)){
-					nb++;
-				}
-			}
-			return nb;
-		}catch(NullPointerException e){
-			return 0;
-		}
-		
+		return this.comptesListEpargne.size();
 	}
 	
 	public void creerCompte(Compte compte){
-		this.comptesList.add(compte);
+		if (compte.getClass().equals(CompteCourant.class)){
+			this.comptesListCourant.add((CompteCourant)compte);
+		}else{
+			this.comptesListEpargne.add((CompteEpargne)compte);
+		}
 	}
 	
 	public void supprimerCompte(Compte compte){
-		this.comptesList.remove(compte);
-	}
-	
-	public void supprimerCompte(Integer key){
-		this.comptesList.remove(key);
+		if (compte.getClass().equals(CompteCourant.class)){
+			this.comptesListCourant.remove((CompteCourant)compte);
+		}else{
+			this.comptesListEpargne.remove((CompteEpargne)compte);
+		}
 	}
 	
 	public Compte retournerCompte(String numero) throws CompteNonTrouveException{
-		Iterator<Compte> it = comptesList.iterator();
+		Iterator<CompteCourant> itc = comptesListCourant.iterator();
+		Iterator<CompteEpargne> ite = comptesListEpargne.iterator();
 		Compte compte;
 		
-		while (it.hasNext()){
-			compte = it.next();
+		while (itc.hasNext()){
+			compte = itc.next();
+			if (compte.getNumero().equals(numero)){
+				return compte;
+			}
+		}
+		while (ite.hasNext()){
+			compte = ite.next();
 			if (compte.getNumero().equals(numero)){
 				return compte;
 			}

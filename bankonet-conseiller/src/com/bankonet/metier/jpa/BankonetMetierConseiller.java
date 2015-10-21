@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import com.bankonet.dao.jpa.BankonetDAOFactory;
 import com.bankonet.dao.jpa.BankonetFactoryJPA;
 import com.bankonet.lib.Client;
+import com.bankonet.lib.Compte;
+import com.bankonet.lib.CompteCourant;
+import com.bankonet.lib.CompteEpargne;
 
 public class BankonetMetierConseiller implements BankonetMetierFactory {
 	//attributs
@@ -39,11 +42,16 @@ public class BankonetMetierConseiller implements BankonetMetierFactory {
 	@Override
 	public void init() {
 		ArrayList<Client> clients = new ArrayList<>();
+		ArrayList<Compte> comptes = new ArrayList<>();
 		clients.add(new Client("Kirigaya", "Kazuto", "KirigayaKazuto", "kirito", "asuna"));
+		comptes.add(new CompteCourant("cckk01","cckk01",100.0,10.0));
+		comptes.add(new CompteEpargne("cekk01","cekk01",200.0,2.0));
+		clients.get(0).setComptesList(comptes);
 		clients.add(new Client("Yuki", "Asuna", "YukiAsuna", "asuna", "kirito"));
 		clients.add(new Client("Kirigaya", "Yui", "KirigayaYui", "yui", "mhcp01"));
 		clients.add(new Client("Kirigaya", "Suguha", "KirigayaSuguha", "leaffa", "alo"));
 		clients.add(new Client("Kono", "Yuki", "KonoYuki", "yuki", "rosario"));
+		bdf.getCompteFactory().setComptes(comptes);
 		bdf.getClientFactory().setClients(clients);
 		
 		this.clients.addAll(clients);

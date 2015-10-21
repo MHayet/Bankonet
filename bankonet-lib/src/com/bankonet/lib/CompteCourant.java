@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class CompteCourant extends Compte{
+	
 	//attributs
 	@Column(name = "DecouvertMaximum")
 	private Double montantDecouvertAutorise;

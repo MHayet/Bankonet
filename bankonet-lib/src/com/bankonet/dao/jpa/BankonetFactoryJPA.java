@@ -17,7 +17,7 @@ public class BankonetFactoryJPA implements BankonetDAOFactory {
 
 	@Override
 	public BankonetCompteFactory getCompteFactory() {
-		return new BankonetCompteJPA();
+		return new BankonetCompteJPA(emf);
 	}
 
 	@Override
