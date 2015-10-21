@@ -120,7 +120,8 @@ public class BankonetClientJPA implements BankonetClientFactory {
 		EntityTransaction et = em.getTransaction();
 		
 		et.begin();
-		em.createNamedQuery("client.supprimerToutClients");
+		Query query = em.createNamedQuery("client.supprimerToutClients");
+		query.executeUpdate();
 		et.commit();
 		em.close();	
 		
