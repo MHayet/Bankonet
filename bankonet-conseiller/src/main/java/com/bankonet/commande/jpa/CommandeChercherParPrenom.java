@@ -10,6 +10,39 @@ public class CommandeChercherParPrenom extends CommandeFactoryJPA {
 	private String libelle;
 	private Scanner sc;
 	private BankonetMetierConseiller bmc;
+	
+	//constructeurs
+	public CommandeChercherParPrenom(Integer id, String lib) {
+		setId(id);
+		setLibelle(lib);
+	}
+	
+	public CommandeChercherParPrenom(Integer id, String lib, BankonetMetierConseiller bmc) {
+		setId(id);
+		setLibelle(lib);
+		setConseiller(bmc);
+	}
+	
+	public CommandeChercherParPrenom(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+		setId(id);
+		setLibelle(lib);
+		setScanner(sc);
+		setConseiller(bmc);
+	}
+	
+	//methodes
+	@Override
+	public void execute() {
+		System.out.println("**** Recherche par prenom ****");
+		System.out.println("Prenom du client: ");
+		String prenom = sc.next();
+		if (bmc.chercherParPrenom(prenom)){
+			System.out.println("Client trouvé");
+		}else{
+			System.out.println("Client introuvable!");
+		}
+		System.out.println("");
+	}
 
 	//accesseurs
 	@Override
@@ -50,39 +83,6 @@ public class CommandeChercherParPrenom extends CommandeFactoryJPA {
 	@Override
 	public BankonetMetierConseiller getConseiller() {
 		return bmc;
-	}
-	
-	//constructeurs
-	public CommandeChercherParPrenom(Integer id, String lib) {
-		setId(id);
-		setLibelle(lib);
-	}
-	
-	public CommandeChercherParPrenom(Integer id, String lib, BankonetMetierConseiller bmc) {
-		setId(id);
-		setLibelle(lib);
-		setConseiller(bmc);
-	}
-	
-	public CommandeChercherParPrenom(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
-		setId(id);
-		setLibelle(lib);
-		setScanner(sc);
-		setConseiller(bmc);
-	}
-	
-	//methodes
-	@Override
-	public void execute() {
-		System.out.println("**** Recherche par prenom ****");
-		System.out.println("Prenom du client: ");
-		String prenom = sc.next();
-		if (bmc.chercherParPrenom(prenom)){
-			System.out.println("Client trouvé");
-		}else{
-			System.out.println("Client introuvable!");
-		}
-		System.out.println("");
 	}
 
 }

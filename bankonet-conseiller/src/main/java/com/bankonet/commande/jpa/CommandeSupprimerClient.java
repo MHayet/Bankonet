@@ -10,47 +10,6 @@ public class CommandeSupprimerClient extends CommandeFactoryJPA {
 	private String libelle;
 	private Scanner sc;
 	private BankonetMetierConseiller bmc;
-
-	//accesseurs
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	@Override
-	public Integer getId() {
-		return this.id;
-	}
-	
-	@Override
-	public void setLibelle(String lib) {
-		this.libelle = lib;
-	}
-
-	@Override
-	public String getLibelle() {
-		return this.libelle;
-	}
-
-	@Override
-	public void setScanner(Scanner sc) {
-		this.sc = sc;
-	}
-
-	@Override
-	public Scanner getScanner() {
-		return sc;
-	}
-
-	@Override
-	public void setConseiller(BankonetMetierConseiller bmc) {
-		this.bmc = bmc;
-	}
-
-	@Override
-	public BankonetMetierConseiller getConseiller() {
-		return bmc;
-	}
 	
 	//constructeurs
 	public CommandeSupprimerClient(Integer id, String lib) {
@@ -91,6 +50,47 @@ public class CommandeSupprimerClient extends CommandeFactoryJPA {
 			System.out.println("Client non supprimé");
 		}
 		System.out.println("");
+	}
+
+	//accesseurs
+	@Override
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	@Override
+	public Integer getId() {
+		return this.id;
+	}
+	
+	@Override
+	public void setLibelle(String lib) {
+		this.libelle = lib;
+	}
+
+	@Override
+	public String getLibelle() {
+		return this.libelle;
+	}
+
+	@Override
+	public void setScanner(Scanner sc) {
+		this.sc = sc;
+	}
+
+	@Override
+	public Scanner getScanner() {
+		return sc;
+	}
+
+	@Override
+	public void setConseiller(BankonetMetierConseiller bmc) {
+		this.bmc = bmc;
+	}
+
+	@Override
+	public BankonetMetierConseiller getConseiller() {
+		return bmc;
 	}
 
 }

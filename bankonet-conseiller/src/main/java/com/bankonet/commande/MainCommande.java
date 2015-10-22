@@ -10,14 +10,6 @@ import com.bankonet.metier.BankonetMetierConseiller;
 public class MainCommande {
 	private ArrayList<CommandeFactory> commandes  = new ArrayList<>();
 
-	public ArrayList<CommandeFactory> getCommandes() {
-		return commandes;
-	}
-
-	public void setCommandes(ArrayList<CommandeFactory> commandes) {
-		this.commandes = commandes;
-	}
-
 	public MainCommande(Scanner sc, BankonetMetierConseiller bmc) {
 		commandes.add(new CommandeCreerCompteEpargne(3, "Ouvrir un compte epargne", sc, bmc));
 		commandes.add(new CommandeCreerCompte(1, "Ouvrir un compte client", sc, bmc));
@@ -30,6 +22,14 @@ public class MainCommande {
 				return cmd1.getId().compareTo(cmd2.getId());
 			}
 		});
+	}
+
+	public ArrayList<CommandeFactory> getCommandes() {
+		return commandes;
+	}
+
+	public void setCommandes(ArrayList<CommandeFactory> commandes) {
+		this.commandes = commandes;
 	}
 
 }

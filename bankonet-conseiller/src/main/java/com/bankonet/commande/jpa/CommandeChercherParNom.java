@@ -10,6 +10,39 @@ public class CommandeChercherParNom extends CommandeFactoryJPA {
 	private String libelle;
 	private Scanner sc;
 	private BankonetMetierConseiller bmc;
+	
+	//constructeurs
+	public CommandeChercherParNom(Integer id, String lib) {
+		setId(id);
+		setLibelle(lib);
+	}
+	
+	public CommandeChercherParNom(Integer id, String lib, BankonetMetierConseiller bmc) {
+		setId(id);
+		setLibelle(lib);
+		setConseiller(bmc);
+	}
+	
+	public CommandeChercherParNom(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+		setId(id);
+		setLibelle(lib);
+		setScanner(sc);
+		setConseiller(bmc);
+	}
+	
+	//methodes
+	@Override
+	public void execute() {
+		System.out.println("**** Recherche par nom ****");
+		System.out.println("Nom du client: ");
+		String nom = sc.next();
+		if (bmc.chercherParNom(nom)){
+			System.out.println("Client trouvé");
+		}else{
+			System.out.println("Client introuvable!");
+		}
+		System.out.println("");
+	}
 
 	//accesseurs
 	@Override
@@ -50,39 +83,6 @@ public class CommandeChercherParNom extends CommandeFactoryJPA {
 	@Override
 	public BankonetMetierConseiller getConseiller() {
 		return bmc;
-	}
-	
-	//constructeurs
-	public CommandeChercherParNom(Integer id, String lib) {
-		setId(id);
-		setLibelle(lib);
-	}
-	
-	public CommandeChercherParNom(Integer id, String lib, BankonetMetierConseiller bmc) {
-		setId(id);
-		setLibelle(lib);
-		setConseiller(bmc);
-	}
-	
-	public CommandeChercherParNom(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
-		setId(id);
-		setLibelle(lib);
-		setScanner(sc);
-		setConseiller(bmc);
-	}
-	
-	//methodes
-	@Override
-	public void execute() {
-		System.out.println("**** Recherche par nom ****");
-		System.out.println("Nom du client: ");
-		String nom = sc.next();
-		if (bmc.chercherParNom(nom)){
-			System.out.println("Client trouvé");
-		}else{
-			System.out.println("Client introuvable!");
-		}
-		System.out.println("");
 	}
 
 }

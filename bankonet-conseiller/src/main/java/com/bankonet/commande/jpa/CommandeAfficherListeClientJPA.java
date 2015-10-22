@@ -12,6 +12,35 @@ public class CommandeAfficherListeClientJPA extends CommandeFactoryJPA {
 	private String libelle;
 	private Scanner sc;
 	private BankonetMetierConseiller bmc;
+	
+	//constructeurs	
+	public CommandeAfficherListeClientJPA(Integer id, String lib) {
+		setId(id);
+		setLibelle(lib);
+	}
+	
+	public CommandeAfficherListeClientJPA(Integer id, String lib, BankonetMetierConseiller bmc) {
+		setId(id);
+		setLibelle(lib);
+		setConseiller(bmc);
+	}
+	
+	public CommandeAfficherListeClientJPA(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
+		setId(id);
+		setLibelle(lib);
+		setScanner(sc);
+		setConseiller(bmc);
+	}
+	
+	//methodes
+	@Override
+	public void execute() {
+		Iterator<Client> it = bmc.getListeClients().iterator();
+		System.out.println("**** Liste de clients ****");
+		while (it.hasNext()){
+			System.out.println(it.next());
+		}
+	}
 
 	//accesseurs
 	@Override
@@ -52,35 +81,6 @@ public class CommandeAfficherListeClientJPA extends CommandeFactoryJPA {
 	@Override
 	public BankonetMetierConseiller getConseiller() {
 		return bmc;
-	}
-	
-	//constructeurs	
-	public CommandeAfficherListeClientJPA(Integer id, String lib) {
-		setId(id);
-		setLibelle(lib);
-	}
-	
-	public CommandeAfficherListeClientJPA(Integer id, String lib, BankonetMetierConseiller bmc) {
-		setId(id);
-		setLibelle(lib);
-		setConseiller(bmc);
-	}
-	
-	public CommandeAfficherListeClientJPA(Integer id, String lib, Scanner sc, BankonetMetierConseiller bmc) {
-		setId(id);
-		setLibelle(lib);
-		setScanner(sc);
-		setConseiller(bmc);
-	}
-	
-	//methodes
-	@Override
-	public void execute() {
-		Iterator<Client> it = bmc.getListeClients().iterator();
-		System.out.println("**** Liste de clients ****");
-		while (it.hasNext()){
-			System.out.println(it.next());
-		}
 	}
 
 }
