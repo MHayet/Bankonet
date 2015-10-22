@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
+import java.util.Set;
+
+import org.reflections.Reflections;
 
 import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
@@ -18,7 +21,10 @@ public class MainCommandeJPA {
 		this.commandes = commandes;
 	}
 
-	public MainCommandeJPA(Scanner sc, BankonetMetierConseiller bmc) {
+	public MainCommandeJPA(Scanner sc, BankonetMetierConseiller bmc){ 
+		Reflections reflection = new Reflections("com.bankonet.jpa");
+		Set<Class<? extends CommandeFactoryJPA>> soustypes = reflection.getSubTypesOf(CommandeFactoryJPA.class);
+		
 		commandes.add(new CommandeInit(1, "Initialiser", sc, bmc));
 		commandes.add(new CommandeAfficherListeClientJPA(7, "Afficher la liste des clients", sc, bmc));
 		commandes.add(new CommandeChercherParNom(2, "Rechercher un client par son nom", sc, bmc));

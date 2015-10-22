@@ -6,7 +6,7 @@ import java.util.Scanner;
 import com.bankonet.lib.Client;
 import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public class CommandeAfficherListeClientJPA implements CommandeFactoryJPA {
+public class CommandeAfficherListeClientJPA extends CommandeFactoryJPA {
 	//attributs
 	private Integer id;
 	private String libelle;

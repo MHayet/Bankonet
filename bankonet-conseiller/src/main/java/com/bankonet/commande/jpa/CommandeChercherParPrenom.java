@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public class CommandeChercherParPrenom implements CommandeFactoryJPA {
+public class CommandeChercherParPrenom extends CommandeFactoryJPA {
 	//attributs
 	private Integer id;
 	private String libelle;

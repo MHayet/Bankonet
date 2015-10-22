@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public interface CommandeFactoryJPA {
-	public void setId(Integer id);
-	public Integer getId();
-	public void setLibelle(String lib);
-	public String getLibelle();
-	public void setScanner(Scanner sc);
-	public Scanner getScanner();
-	public void setConseiller(BankonetMetierConseiller bmc);
-	public BankonetMetierConseiller getConseiller();
-	public void execute();
+public abstract class CommandeFactoryJPA {
+	public abstract void setId(Integer id);
+	public abstract Integer getId();
+	public abstract void setLibelle(String lib);
+	public abstract String getLibelle();
+	public abstract void setScanner(Scanner sc);
+	public abstract Scanner getScanner();
+	public abstract void setConseiller(BankonetMetierConseiller bmc);
+	public abstract BankonetMetierConseiller getConseiller();
+	public abstract void execute();
 }

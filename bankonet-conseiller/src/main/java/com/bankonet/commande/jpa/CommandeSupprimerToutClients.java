@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public class CommandeSupprimerToutClients implements CommandeFactoryJPA {
+public class CommandeSupprimerToutClients extends CommandeFactoryJPA {
 	//attributs
 	private Integer id;
 	private String libelle;

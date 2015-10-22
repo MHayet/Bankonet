@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import com.bankonet.metier.jpa.BankonetMetierConseiller;
 
-public class CommandeModifierNomClient implements CommandeFactoryJPA {
+public class CommandeModifierNomClient extends CommandeFactoryJPA {
 	//attributs
 	private Integer id;
 	private String libelle;
