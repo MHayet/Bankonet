@@ -121,7 +121,8 @@ public class Client {
 
 	@Override
 	public String toString() {
-		return String.format("Client: id=%s, login=%s, nom=%s, prenom=%s, comptes-courants:%d, comptes-epargnes:%d", identifiant, login, nom, prenom, getNbComptesCourants(), getNbComptesEpargnes());
+		return String.format("Client: id=%s, login=%s, nom=%s, prenom=%s", identifiant, login, nom, prenom);
+		//return String.format("Client: id=%s, login=%s, nom=%s, prenom=%s, comptes-courants:%d, comptes-epargnes:%d", identifiant, login, nom, prenom, getNbComptesCourants(), getNbComptesEpargnes());
 	}
 	
 	//methodes
