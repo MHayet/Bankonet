@@ -13,15 +13,6 @@ public class BankonetMetierConseiller implements BankonetMetierFactory {
 	//attributs
 	private ArrayList<Client> clients;
 	private BankonetDAOFactory bdf;
-	
-	//accesseurs
-	private ArrayList<Client> getClients() {
-		return clients;
-	}
-
-	private void setClients(ArrayList<Client> clients) {
-		this.clients = clients;
-	}
 
 	//constructeurs
 	public BankonetMetierConseiller() {
@@ -130,6 +121,15 @@ public class BankonetMetierConseiller implements BankonetMetierFactory {
 	public void supprimerToutClients() {
 		clients.removeAll(clients);
 		bdf.getClientFactory().supprimerToutClients();
+	}
+	
+	//accesseurs
+	private ArrayList<Client> getClients() {
+		return clients;
+	}
+
+	private void setClients(ArrayList<Client> clients) {
+		this.clients = clients;
 	}
 
 }

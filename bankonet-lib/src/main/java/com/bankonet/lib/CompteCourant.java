@@ -10,15 +10,6 @@ public class CompteCourant extends Compte{
 	@Column(name = "DecouvertMaximum")
 	private Double montantDecouvertAutorise;
 	
-	//accesseurs
-	public Double getMontantDecouvertAutorise() {
-		return montantDecouvertAutorise;
-	}
-
-	public void setMontantDecouvertAutorise(Double montantDecouvertAutorise) {
-		this.montantDecouvertAutorise = montantDecouvertAutorise;
-	}
-	
 	//constructeurs
 	public CompteCourant(){}
 	
@@ -48,5 +39,14 @@ public class CompteCourant extends Compte{
 		} else {
 			System.out.println("Crédit négatif");
 		}
+	}
+	
+	//accesseurs
+	public Double getMontantDecouvertAutorise() {
+		return montantDecouvertAutorise;
+	}
+
+	public void setMontantDecouvertAutorise(Double montantDecouvertAutorise) {
+		this.montantDecouvertAutorise = montantDecouvertAutorise;
 	}
 }

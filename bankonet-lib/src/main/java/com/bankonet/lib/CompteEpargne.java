@@ -12,15 +12,6 @@ public class CompteEpargne extends Compte{
 	@Column(name = "tauxinteret")
 	private Double tauxInteret;
 	
-	//accesseurs
-	public Double getTauxInteret() {
-		return tauxInteret;
-	}
-
-	public void setTauxInteret(Double tauxInteret) {
-		this.tauxInteret = tauxInteret;
-	}
-	
 	//constructeurs
 	public CompteEpargne(){}
 	
@@ -48,5 +39,14 @@ public class CompteEpargne extends Compte{
 		} else{
 			throw new CreditException("Credit impossible: plafond dépassé!");
 		}
+	}
+	
+	//accesseurs
+	public Double getTauxInteret() {
+		return tauxInteret;
+	}
+
+	public void setTauxInteret(Double tauxInteret) {
+		this.tauxInteret = tauxInteret;
 	}
 }

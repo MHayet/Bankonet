@@ -13,17 +13,13 @@ import com.bankonet.metier.jpa.BankonetMetierConseiller;
 public class MainCommandeJPA {
 	private ArrayList<CommandeFactoryJPA> commandes  = new ArrayList<>();
 
-	public ArrayList<CommandeFactoryJPA> getCommandes() {
-		return commandes;
-	}
-
-	public void setCommandes(ArrayList<CommandeFactoryJPA> commandes) {
-		this.commandes = commandes;
-	}
-
 	public MainCommandeJPA(Scanner sc, BankonetMetierConseiller bmc){ 
 		Reflections reflection = new Reflections("com.bankonet.jpa");
 		Set<Class<? extends CommandeFactoryJPA>> soustypes = reflection.getSubTypesOf(CommandeFactoryJPA.class);
+		
+		for (Class<? extends CommandeFactoryJPA> classe:soustypes){
+			System.out.println(classe.getName());
+		}
 		
 		commandes.add(new CommandeInit(1, "Initialiser", sc, bmc));
 		commandes.add(new CommandeAfficherListeClientJPA(7, "Afficher la liste des clients", sc, bmc));
@@ -39,6 +35,14 @@ public class MainCommandeJPA {
 				return cmd1.getId().compareTo(cmd2.getId());
 			}
 		});
+	}
+
+	public ArrayList<CommandeFactoryJPA> getCommandes() {
+		return commandes;
+	}
+
+	public void setCommandes(ArrayList<CommandeFactoryJPA> commandes) {
+		this.commandes = commandes;
 	}
 
 }

@@ -12,15 +12,6 @@ import com.bankonet.lib.Client;
 public class BankonetClientJPA implements BankonetClientFactory {
 	//attributs
 	private EntityManagerFactory emf;
-	
-	//accesseurs
-	public EntityManagerFactory getEmf() {
-		return emf;
-	}
-
-	public void setEmf(EntityManagerFactory emf) {
-		this.emf = emf;
-	}
 
 	//construteurs
 	public BankonetClientJPA(EntityManagerFactory emf) {
@@ -125,6 +116,15 @@ public class BankonetClientJPA implements BankonetClientFactory {
 		et.commit();
 		em.close();	
 		
+	}
+	
+	//accesseurs
+	public EntityManagerFactory getEmf() {
+		return emf;
+	}
+
+	public void setEmf(EntityManagerFactory emf) {
+		this.emf = emf;
 	}
 
 }

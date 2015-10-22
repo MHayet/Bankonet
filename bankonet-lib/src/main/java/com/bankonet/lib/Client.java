@@ -39,72 +39,14 @@ public class Client {
 		joinColumns = @JoinColumn(name="IdentifiantClient", referencedColumnName="Identifiant"),
 		inverseJoinColumns = @JoinColumn(name="NumeroCompte", referencedColumnName="Numero")
 	)
-	private List<CompteCourant> comptesListCourant;
+	private List<CompteCourant> comptesListCourant = new ArrayList<>();
 	@ManyToMany
 	@JoinTable(
 		name="clientepargne",
 		joinColumns = @JoinColumn(name="IdentifiantClient", referencedColumnName="Identifiant"),
 		inverseJoinColumns = @JoinColumn(name="NumeroCompte", referencedColumnName="Numero")
 	)
-	private List<CompteEpargne> comptesListEpargne;
-	
-	//accesseurs
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
-	public String getIdentifiant() {
-		return identifiant;
-	}
-
-	public void setIdentifiant(String identifiant) {
-		this.identifiant = identifiant;
-	}
-	
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getMdp() {
-		return mdp;
-	}
-
-	public void setMdp(String mdp) {
-		this.mdp = mdp;
-	}
-
-	public ArrayList<Compte> getComptesList(){
-		ArrayList<Compte> comptes = new ArrayList<>();
-		comptes.addAll(comptesListCourant);
-		comptes.addAll(comptesListEpargne);
-		return comptes; 
-	}
-	
-	public void setComptesList(ArrayList<Compte> comptesList) {
-		for (Compte compte:comptesList){
-			if(compte.getClass().equals(CompteCourant.class)){
-				this.comptesListCourant.add((CompteCourant)compte);
-			}else{
-				this.comptesListEpargne.add((CompteEpargne)compte);
-			}
-		}		
-	}
+	private List<CompteEpargne> comptesListEpargne = new ArrayList<>();
 
 	//constructeurs
 	public Client(){}
@@ -115,8 +57,6 @@ public class Client {
 		setIdentifiant(id);
 		setLogin(login);
 		setMdp(mdp);
-		this.comptesListCourant = new ArrayList<CompteCourant>();
-		this.comptesListEpargne = new ArrayList<CompteEpargne>();
 	}
 
 	@Override
@@ -192,5 +132,63 @@ public class Client {
 		}catch(CompteNonTrouveException e){
 			System.out.println(e);
 		}
+	}
+	
+	//accesseurs
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getIdentifiant() {
+		return identifiant;
+	}
+
+	public void setIdentifiant(String identifiant) {
+		this.identifiant = identifiant;
+	}
+	
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getMdp() {
+		return mdp;
+	}
+
+	public void setMdp(String mdp) {
+		this.mdp = mdp;
+	}
+
+	public ArrayList<Compte> getComptesList(){
+		ArrayList<Compte> comptes = new ArrayList<>();
+		comptes.addAll(comptesListCourant);
+		comptes.addAll(comptesListEpargne);
+		return comptes; 
+	}
+	
+	public void setComptesList(ArrayList<Compte> comptesList) {
+		for (Compte compte:comptesList){
+			if(compte.getClass().equals(CompteCourant.class)){
+				this.comptesListCourant.add((CompteCourant)compte);
+			}else{
+				this.comptesListEpargne.add((CompteEpargne)compte);
+			}
+		}		
 	}
 }

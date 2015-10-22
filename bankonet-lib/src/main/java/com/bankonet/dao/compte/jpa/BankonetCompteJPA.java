@@ -16,15 +16,6 @@ import com.bankonet.lib.CompteEpargne;
 public class BankonetCompteJPA implements BankonetCompteFactory {
 	//attributs
 	private EntityManagerFactory emf;
-	
-	//accesseurs
-	public EntityManagerFactory getEmf() {
-		return emf;
-	}
-
-	public void setEmf(EntityManagerFactory emf) {
-		this.emf = emf;
-	}
 
 	//construteurs
 	public BankonetCompteJPA(EntityManagerFactory emf) {
@@ -64,6 +55,15 @@ public class BankonetCompteJPA implements BankonetCompteFactory {
 		em.close();
 		
 		return comptes;
+	}
+	
+	//accesseurs
+	public EntityManagerFactory getEmf() {
+		return emf;
+	}
+
+	public void setEmf(EntityManagerFactory emf) {
+		this.emf = emf;
 	}
 
 }

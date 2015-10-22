@@ -15,15 +15,6 @@ public class BankonetMetierConseiller implements BankonetMetierFactory {
 	private ArrayList<Client> clients;
 	private BankonetDAOFactory bdf;
 	
-	//accesseurs
-	private ArrayList<Client> getClients() {
-		return clients;
-	}
-
-	private void setClients(ArrayList<Client> clients) {
-		this.clients = clients;
-	}
-	
 	//constructeurs
 	public BankonetMetierConseiller() {
 		clients = new ArrayList<>();
@@ -91,6 +82,15 @@ public class BankonetMetierConseiller implements BankonetMetierFactory {
 		}
 		bdf.getCompteFactory().setComptes(comptes);
 		bdf.getClientFactory().setClients(getClients());
+	}
+	
+	//accesseurs
+	private ArrayList<Client> getClients() {
+		return clients;
+	}
+
+	private void setClients(ArrayList<Client> clients) {
+		this.clients = clients;
 	}
 
 }

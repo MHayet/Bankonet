@@ -20,31 +20,6 @@ public abstract class Compte implements CompteStat {
 	@Transient
 	private static Integer nbCompte = 0;
 	
-	//accesseurs
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getIntitule() {
-		return intitule;
-	}
-
-	public void setIntitule(String intitule) {
-		this.intitule = intitule;
-	}
-
-	public Double getSolde() {
-		return solde;
-	}
-
-	public void setSolde(Double solde) {
-		this.solde = solde;
-	}
-	
 	//constructeurs
 	public Compte(){}
 	
@@ -98,6 +73,31 @@ public abstract class Compte implements CompteStat {
 	@Override
 	public String toString() {
 		return String.format("numero=%s, intitule=%s, solde=%s", numero, intitule, solde);
+	}
+	
+	//accesseurs
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public String getIntitule() {
+		return intitule;
+	}
+
+	public void setIntitule(String intitule) {
+		this.intitule = intitule;
+	}
+
+	public Double getSolde() {
+		return solde;
+	}
+
+	public void setSolde(Double solde) {
+		this.solde = solde;
 	}
 
 }
