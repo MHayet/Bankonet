@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>dta</groupId>
+	<artifactId>bankonet-data</artifactId>
+	<version>1.0.0</version>
+	
+	<properties>
+		<jdbc.driver>com.mysql.jdbc.Driver</jdbc.driver>
+		<jdbc.url>jdbc:mysql://localhost:3306/bankonet</jdbc.url>
+		<user>Conseiller</user>
+		<mdp>conseiller</mdp>
+	</properties>
+  
+	<build>  		
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sql-maven-plugin</artifactId>
+				<version>1.5</version>
+
+				<dependencies>
+					<!-- specify the dependent jdbc driver here -->
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>5.1.35</version>
+						<scope>runtime</scope>
+					</dependency>
+				</dependencies>
+
+				<!-- common configuration shared by all executions -->
+				<configuration>
+					<driver>${jdbc.driver}</driver>
+					<url>${jdbc.url}</url>
+					<username>${user}</username>
+					<password>${mdp}</password>
+					<!-- You can comment out username/password configurations and
+						have maven to look them up in your settings.xml using ${settingsKey}
+					-->
+				</configuration>
+		
+				<executions>
+					<execution>
+						<id>purge</id>
+						<phase>test</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<autocommit>true</autocommit>
+							<srcFiles>
+								<srcFile>src/main/sql/clean-db.sql</srcFile>
+							</srcFiles>
+						</configuration>
+					</execution>
+		
+					<execution>
+						<id>init</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<configuration>
+							<autocommit>true</autocommit>
+							<srcFiles>
+								<srcFile>src/main/sql/init-db.sql</srcFile>
+							</srcFiles>
+						</configuration>
+					</execution>
+				</executions>
+				
+			</plugin>
+		</plugins>
+	</build>
+</project>
