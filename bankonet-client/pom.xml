@@ -3,9 +3,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>dta</groupId>
 	<artifactId>bankonet-client</artifactId>
-	<version>1.0.0</version>
+	
+	<parent>
+		<groupId>dta</groupId>
+		<artifactId>bankonet-parent</artifactId>
+		<version>1.0.0</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
 
 	<build>
 		<pluginManagement>
@@ -25,25 +30,6 @@
 		<dependency>
 			<groupId>dta</groupId>
 			<artifactId>bankonet-lib</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.35</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>4.3.9.Final</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.3.9.Final</version>
-			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 
