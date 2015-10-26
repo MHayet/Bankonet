@@ -57,6 +57,7 @@ public class Client {
 		setIdentifiant(id);
 		setLogin(login);
 		setMdp(mdp);
+		setMdp(12);
 	}
 
 	@Override
