@@ -27,7 +27,7 @@ public class Client {
 	private String nom;
 	@Column(name = "Prenom")
 	private String prenom;
-	@Id
+	//@Id
 	private String identifiant;
 	@Column(name = "Login")
 	private String login;
