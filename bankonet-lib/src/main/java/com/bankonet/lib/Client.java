@@ -27,7 +27,7 @@ public class Client {
 	private String nom;
 	@Column(name = "Prenom")
 	private String prenom;
-	//@Id
+	@Id
 	private String identifiant;
 	@Column(name = "Login")
 	private String login;
@@ -57,6 +57,7 @@ public class Client {
 		setIdentifiant(id);
 		setLogin(login);
 		setMdp(mdp);
+		setMdp(12);
 	}
 
 	@Override
